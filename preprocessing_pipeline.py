@@ -274,13 +274,13 @@ def augmentations_mirror():
    
 # Función principal
 def main():
-    # download_roboflow_datasets()
-    # clean_categories = ["Grapefruit", "Coconut"]
-    # clean_data(clean_categories)
-    # convert_annotations()
-    # organize_oid_dataset()
+    download_roboflow_datasets()
+    clean_categories = ["Grapefruit", "Coconut"]
+    clean_data(clean_categories)
+    convert_annotations()
+    organize_oid_dataset()
     integrate_roboflow()
-    # augmentations_mirror()
+    augmentations_mirror()
     print("🎉 ¡Preprocesamiento de datos completado! Listo para entrenamiento en YOLOv7")
 
 if __name__ == "__main__":
