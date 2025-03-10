@@ -52,8 +52,7 @@ def download_roboflow_datasets():
 
 # Paso 1: Limpieza de datos (Quitamos Grapefruit y Coconut porque se ha detectado que las imágenes no son válidas)
 def clean_data(categories):
-    categories_list = categories.split(", ")
-    print("🧹 Limpiando las clases inválidas:", categories_list)
+    print("🧹 Limpiando las clases inválidas:", categories)
 
     for category in categories:
         if category in class_index:
