@@ -5,6 +5,8 @@ import numpy as np
 from tqdm import tqdm
 import imgaug.augmenters as iaa
 import random
+from roboflow import Roboflow
+
 
 # Rutas principales
 ROOT_DIR = os.getcwd()
@@ -20,6 +22,33 @@ print("🔹 Cargando clases desde classes.txt... ✅")
 with open(CLASSES_FILE, "r") as f:
     class_names = [line.strip() for line in f.readlines()]
 class_index = {name: idx for idx, name in enumerate(class_names)}
+
+# Paso 0: Descargamos productos adicionales de Roboflow
+def download_roboflow_datasets():
+    print("📥 Descargando datasets adicionales de Roboflow...")
+    os.makedirs(ROBOFLOW_DIR, exist_ok=True)
+    datasets = {
+        "Avocado": ("latihancnn", "alpukat-pepaya", 1),
+        "Bellpepper": ("swarajs-workspace", "capsicum-detection-5dzng", 1),
+        "Cauliflower": ("swarajs-workspace", "cauli-flower-detection", 1),
+        "Garlic": ("workplace-bz64d", "garlic-uerzz", 1),
+        "Kiwi": ("pham-van-loc", "yolox3", 2),
+        "Onion": ("yeoworm", "onion-dkyks", 2),
+        "Plum": ("shj1864-naver-com", "plum-saygz", 1)
+    }
+    
+    rf = Roboflow(api_key="jP9akRvjCWtBSSZB2sWk")
+    
+    for category, (workspace, project_name, version) in datasets.items():
+        print(f"🔄 Descargando {category}...")
+        project = rf.workspace(workspace).project(project_name)
+        dataset = project.version(version).download("yolov7")
+        extracted_path = os.path.join(ROOT_DIR, dataset.location)
+        renamed_path = os.path.join(ROBOFLOW_DIR, category)
+        shutil.move(extracted_path, renamed_path)
+        print(f"✅ {category} descargado y renombrado correctamente.")
+    
+    print("📥 Todas las descargas de Roboflow completadas!")
 
 # Paso 1: Limpieza de datos (Quitamos Grapefruit y Coconut porque se ha detectado que las imágenes no son válidas)
 def clean_data(categories):
