@@ -79,6 +79,46 @@ for base_dir in base_dirs:
                 for class_id, (x, y, w, h) in zip(class_labels, flipped_boxes):
                     f.write(f"{class_id} {x:.6f} {y:.6f} {w:.6f} {h:.6f}\n")
 
+
+            img_both = cv2.imread(output_img_path_flip)
+            if img_both is None or not os.path.exists(output_label_path_flip):
+                continue  # Saltar imágenes corruptas o sin etiquetas
+
+            img_both = cv2.cvtColor(img_both, cv2.COLOR_BGR2RGB)
+            height, width, _ = img_both.shape
+
+            # Leer etiquetas YOLO
+            with open(output_label_path_flip, "r") as f:
+                lines = f.readlines()
+
+            boxes = []
+            class_labels = []
+            for line in lines:
+                parts = line.strip().split()
+                class_id = int(parts[0])
+                x_center, y_center, w, h = map(float, parts[1:])
+                boxes.append([x_center, y_center, w, h])
+                class_labels.append(class_id)
+
+            # Aplicar espejo vertical (solo espejo)
+            flipped_img = flip_augmenter_vertical(image=img_both)
+
+            # Ajustar bounding boxes para el espejo
+            flipped_boxes = [[x, 1.0 - y, w, h] for x, y, w, h in boxes]
+
+            # Guardar imagen con solo el espejo
+            output_img_name_flip = f"flipV_{output_img_name_flip}"
+            output_img_path_flip = os.path.join(output_class_images, output_img_name_flip)
+            cv2.imwrite(output_img_path_flip, cv2.cvtColor(flipped_img, cv2.COLOR_RGB2BGR))
+
+            # Guardar etiquetas YOLO ajustadas para el espejo
+            output_label_name_flip = output_img_name_flip.replace(".jpg", ".txt").replace(".png", ".txt")
+            output_label_path_flip = os.path.join(output_class_labels, output_label_name_flip)
+            with open(output_label_path_flip, "w") as f:
+                for class_id, (x, y, w, h) in zip(class_labels, flipped_boxes):
+                    f.write(f"{class_id} {x:.6f} {y:.6f} {w:.6f} {h:.6f}\n")
+
+            
             # Aplicar espejo vertical (solo espejo)
             flipped_img = flip_augmenter_vertical(image=img)
 
