@@ -35,11 +35,10 @@ El archivo `requirements.txt` incluye:
 ---
 
 ## **2️⃣ Instalación de YOLOv7**
-El primer paso es clonar el repositorio oficial de **YOLOv7** y asegurarnos de que tenemos todas las dependencias necesarias instaladas.
+Antes de nada, debes contar y trabajar con este repositorio descargado (mediante git clone, o descargando directamente el .zip).
+El primer paso es clonar el repositorio oficial de **YOLOv7** en nuestra copia local del proyecto y asegurarnos de que tenemos todas las dependencias necesarias instaladas.
 
 ```bash
-mkdir PROYECTO_Grupo4
-cd PROYECTO_Grupo4
 git clone https://github.com/WongKinYiu/yolov7.git YOLOv7
 cd YOLOv7
 pip install -r requirements.txt
