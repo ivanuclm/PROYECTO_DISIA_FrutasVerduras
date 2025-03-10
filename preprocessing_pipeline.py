@@ -81,6 +81,7 @@ def convert_annotations():
                     os.chdir("Label")
                     
                     for filename in tqdm(os.listdir(os.getcwd())):
+                        filename_str = str.split(filename, ".")[0]
                         if filename.endswith(".txt"):
                             annotations = []
                             with open(filename) as f:
@@ -89,8 +90,16 @@ def convert_annotations():
                             for line in lines:
                                 labels = line.split()
                                 coords = list(map(float, labels[1:]))
-                                image_file = os.path.join("..", labels[0] + ".jpg")
+                                image_file = os.path.join("..", filename_str + ".jpg")
+
+                                if not os.path.exists(image_file):
+                                    print(f"❌ ERROR: No se encontró la imagen {image_file}")
+                                    continue
+
                                 image = cv2.imread(image_file)
+                                if image is None:
+                                    print(f"⚠️ Advertencia: No se pudo leer la imagen {image_file}")
+                                    continue
                                 
                                 if image is not None:
                                     coords[2] -= coords[0]
