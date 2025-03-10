@@ -157,7 +157,11 @@ def integrate_roboflow():
         if os.path.isdir(category_path) and category in roboflow_index:
             for subset in ["train", "test", "valid"]:
                 source_subset = os.path.join(category_path, subset)
-                target_subset = os.path.join(OID_NORMALIZED_DIR, subset, category)
+                subset_name = subset
+                if subset == "valid":
+                    subset_name = "validation"
+                
+                target_subset = os.path.join(OID_NORMALIZED_DIR, subset_name, category)
                 os.makedirs(target_subset, exist_ok=True)
                 images_dest = os.path.join(target_subset, "images")
                 labels_dest = os.path.join(target_subset, "labels")
