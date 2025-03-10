@@ -111,19 +111,23 @@ python preprocessing_pipeline.py
 ### **🛠 Solución si `preprocessing_pipeline.py` no funciona**
 Si por algún motivo el script no se ejecuta correctamente, sigue estos pasos manualmente:
 
-1. **Convertir anotaciones a formato YOLOv7**:
+1. **Redimensionar a 640x640**:
+   ```bash
+   python resizeImages.py
+   ```
+2. **Convertir anotaciones a formato YOLOv7**:
    ```bash
    python convert_annotations.py
    ```
-2. **Organizar el dataset en `OID_normalized`**:
+3. **Organizar el dataset en `OID_normalized`**:
    ```bash
    python arreglarOID.py
    ```
-3. **Integrar datasets adicionales desde Roboflow**:
+4. **Integrar datasets adicionales desde Roboflow**:
    ```bash
    python augmentationRoboflow.py
    ```
-4. **Aplicar Data Augmentation**:
+5. **Aplicar Data Augmentation**:
    ```bash
    python augmentationsMirror.py
    ```

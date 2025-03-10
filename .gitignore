@@ -1,8 +1,9 @@
 OID/
+OID_pruebas/
 OID_normalized/
+OID_normalized_pruebas/
 Roboflow/
 Download_OID.ipynb
-OID_normalized_pruebas/
 README copy.md
 Data_augmentation.ipynb
 Data_augmention.ipynb
