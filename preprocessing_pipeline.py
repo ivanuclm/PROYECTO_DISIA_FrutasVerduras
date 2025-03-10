@@ -10,7 +10,7 @@ from roboflow import Roboflow
 
 # Rutas principales
 ROOT_DIR = os.getcwd()
-OID_DIR = os.path.join(ROOT_DIR, 'OID')
+OID_DIR = os.path.join(ROOT_DIR, 'OID/Dataset')
 OID_NORMALIZED_DIR = os.path.join(ROOT_DIR, 'OID_normalized')
 ROBOFLOW_DIR = os.path.join(ROOT_DIR, 'Roboflow')
 CLASSES_FILE = os.path.join(ROOT_DIR, 'classes.txt')
