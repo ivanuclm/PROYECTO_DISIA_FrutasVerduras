@@ -7,3 +7,4 @@ argparse
 tqdm
 #setuptools==58.2.0
 urllib3==1.25.10
+roboflow

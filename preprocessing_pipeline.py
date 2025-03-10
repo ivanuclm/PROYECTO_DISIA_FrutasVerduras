@@ -261,6 +261,7 @@ def augmentations_mirror():
    
 # Función principal
 def main():
+    download_roboflow_datasets()
     clean_categories = ["Grapefruit", "Coconut"]
     clean_data(clean_categories)
     convert_annotations()
