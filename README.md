@@ -1,6 +1,22 @@
 # **Descarga y Preparación del Dataset de Imágenes para YOLOv7**
 
+🚨 **¡ATENCIÓN!** 🚨
+Si no deseas ejecutar la descarga con el Toolkit y prefieres saltarte este paso, puedes descargar directamente el dataset desde **Google Drive**. Solo tienes que:
+1. Descargar la carpeta `OID` desde [este enlace](https://drive.google.com/drive/u/2/folders/1AeTtp5Fn6BXYLyS_WBxq7iNSwIE4_Gwk).
+2. Mover `OID` a la carpeta del repositorio clonado `PROYECTO_DISIA_FrutasVerduras`, al mismo nivel que `preprocessing_pipeline.py`.
+3. Ir directamente al **paso 6** y ejecutar el pipeline de preprocesamiento con:
+   ```bash
+   python preprocessing_pipeline.py
+   ```
+Esto generará `OID_normalized/` sin necesidad de descargar las imágenes con OIDv4Toolkit. También puedes descargar el dataset ya preprocesado directamente desde el enlace anterior.
+
+La carpeta `Roboflow` dentro del Drive contiene los datasets seleccionados de Roboflow para la agregación de productos ya descargados de manera manual. Sin embargo, el script `preprocessing_pipeline.py` **se encarga de descargar automáticamente** estos datasets al ejecutarse. Estos archivos ocupan aproximadamente **300 MB**, por lo que la descarga es rápida y sin complicaciones.
+
+---
+
+
 Este documento describe los pasos para descargar el dataset de imágenes de **Open Images Dataset**, convertirlo al formato **YOLOv7**, y realizar el preprocesamiento necesario para el entrenamiento del modelo.
+
 
 ---
 
