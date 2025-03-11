@@ -343,7 +343,42 @@ def augmentations_mirror():
                         f.write(f"{class_id} {x:.6f} {y:.6f} {w:.6f} {h:.6f}\n")
 
     print("✅ Data Augmentation completada y guardada en las carpetas correspondientes")
-   
+
+# # Paso 7: Convertir imágenes a float32 (último paso antes del entrenamiento)
+# def convert_to_float32():
+#     print("Convertiendo imágenes a float32...")
+
+#     for base_dir in ["train", "validation", "test"]:
+#         base_path = os.path.join(OID_NORMALIZED_DIR, base_dir)
+#         if not os.path.exists(base_path):
+#             continue  # Saltar si el directorio no existe
+
+#         for class_name in os.listdir(base_path):
+#             class_path = os.path.join(base_path, class_name)
+#             images_path = os.path.join(class_path, "images")
+
+#             if not os.path.exists(images_path):
+#                 continue  # Saltar si no existe la carpeta de imágenes
+
+#             for img_name in tqdm(os.listdir(images_path), desc=f"Procesando {class_name} en {base_dir}"):
+#                 if not img_name.endswith((".jpg", ".png")):
+#                     continue  # Saltar archivos no imagen
+
+#                 img_path = os.path.join(images_path, img_name)
+
+#                 # Leer imagen
+#                 img = cv2.imread(img_path)
+#                 if img is None:
+#                     continue  # Saltar imágenes corruptas
+
+#                 # Convertir a float32 y normalizar
+#                 img = img.astype(np.float32) / 255.0
+
+#                # Volver a guardar la imagen (OpenCV solo guarda uint8, así que la reescalamos)
+#                 cv2.imwrite(img_path, (img * 255).astype(np.uint8))
+
+#     print("Conversión a float32 completada.")
+
 # Función principal
 def main():
     download_roboflow_datasets()
@@ -354,6 +389,7 @@ def main():
     organize_oid_dataset()
     integrate_roboflow()
     augmentations_mirror()
+    # convert_to_float32() # No lo activamos hasta el siguiente hito
     print("🎉 ¡Preprocesamiento de datos completado! Listo para entrenamiento en YOLOv7")
 
 if __name__ == "__main__":
